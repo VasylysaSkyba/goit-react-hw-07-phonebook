@@ -1,12 +1,16 @@
-export const getContacts = state => state.contacts;
+export const getContacts = ({ contacts }) => contacts.items;
+
 
 export const getFilteredContacts = ({ contacts, filter }) => {
   if (!filter) {
-    return contacts;
+    return contacts.items;
   }
 
   const normalizedFilter = filter.toLowerCase();
-  return contacts.filter(contact =>
-    contact.name.toLocaleLowerCase().includes(normalizedFilter)
-  );
+  const result = contacts.items.filter(({ name }) => {
+    const normalizedName = name.toLowerCase();
+    return normalizedName.includes(normalizedFilter);
+  });
+
+  return result;
 };
