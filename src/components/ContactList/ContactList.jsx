@@ -8,8 +8,8 @@ const ContactList = () => {
   const contacts = useSelector(getFilteredContacts);
   return (
     <ul className={css.list}>
-      {contacts.map(({ id, name, number }) => (
-        <ContactListItem key={id} name={name} number={number} id={id} />
+      {contacts.map(({ id, name, phone }) => (
+        <ContactListItem key={id} name={name} phone={phone} id={id} />
       ))}
     </ul>
   );

@@ -7,7 +7,7 @@ import css from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -17,8 +17,8 @@ const ContactForm = () => {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default:
         return;
@@ -31,22 +31,22 @@ const ContactForm = () => {
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
-    const isNumberAdded = contacts.some(contact => contact.number === number);
+    const isPhoneAdded = contacts.some(contact => contact.phone === phone);
     if (isNameAdded) {
       Notify.failure(`${name} is alredy in contacts`);
       return;
-    } else if (isNumberAdded) {
-      Notify.failure(`${number} is alredy in contacts`);
+    } else if (isPhoneAdded) {
+      Notify.failure(`${phone} is alredy in contacts`);
       return;
     }
 
-    onAddContact({ name, number });
+    onAddContact({ name, phone });
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
-  const onAddContact = ({ name, number }) => {
-    const action = addContact({ name, number });
+  const onAddContact = ({ name, phone}) => {
+    const action = addContact({ name, phone});
     dispatch(action);
   };
 
@@ -69,10 +69,10 @@ const ContactForm = () => {
         Number
         <input
           className={css.inputNumber}
-          value={number}
+          value={phone}
           onChange={handleChange}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

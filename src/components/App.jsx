@@ -18,7 +18,7 @@ function App() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  console.log(contacts);
+ 
 
   return (
     <div className={css.phonebookContainer}>
